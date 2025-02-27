@@ -208,7 +208,22 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': '187986647849-jqte600inu3cmm44m92jqalh73jt4oe3.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        },
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -244,6 +259,12 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_URL = 'accounts:logout'
 LOGOUT_REDIRECT_URL = 'accounts:login'
 
+
+SOCIAL_AUTH_FACEBOOK_KEY = 491215236958489      # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '798b25008431f40be6f7df9bebc2a534'  # App Secret
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '187986647849-jqte600inu3cmm44m92jqalh73jt4oe3.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 
 
