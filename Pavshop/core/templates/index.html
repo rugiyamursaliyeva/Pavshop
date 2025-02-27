@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<!-- Swiper CSS -->
+<!-- <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"> -->
+
+{% endblock %}
+
+  {% block content %}
+  <!--======= HOME MAIN SLIDER =========-->
+  <section class="home-slider"> 
+  
+    <!-- SLIDE Start -->
+    <!-- Swiper -->
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <!-- Slide 1 -->
+        <div class="swiper-slide" style="position: relative;">
+          <img src="{% static 'photo/photo2024.jpg' %}" alt="slider" style="width:100%; height: auto;">
+    
+          <!-- Ürünün açıklaması -->
+          <div class="tp-caption font-playfair sfb tp-resizeme" 
+               style="position: absolute; top: 10%; left: 10%; z-index: 7; font-size:18px; color:#fff;">
+            The Latest Product from PAVSHOP
+          </div>
+    
+          <!-- Ürünün fiyatı -->
+          <div class="tp-caption sfl font-extra-bold tp-resizeme" 
+               style="position: absolute; top: 30%; left: 10%; z-index: 6; font-size:80px; color:#2d3a4b; text-transform:uppercase;">
+            <small class="font-regular">$</small>299
+          </div>
+    
+          <!-- Featured yazısı -->
+          <div class="tp-caption sfr font-extra-bold tp-resizeme" 
+               style="position: absolute; top: 45%; left: 10%; z-index: 6; font-size:120px; color:#fff; text-transform:uppercase;">
+            featured
+          </div>
+    
+          <!-- Cycle yazısı -->
+          <div class="tp-caption sfr font-extra-bold tp-resizeme" 
+               style="position: absolute; top: 60%; left: 10%; z-index: 6; font-size:120px; color:#fff; text-transform:uppercase;">
+            cycle
+          </div>
+    
+          <!-- SHOP NOW ve BUY NOW düğmeleri -->
+          <div class="tp-caption lfb tp-resizeme" 
+               style="position: absolute; top: 80%; left: 10%; z-index: 8;">
+            <a href="{% url 'product:product_list' %}" class="btn" style="color: #fff; background-color: #2d3a4b; padding: 10px 20px; margin-right: 10px;">SHOP NOW</a>
+            <a href="http://127.0.0.1:8000/en/product/product/soft-gray-fabric-sofa/" class="btn" style="color: #fff; background-color: #2d3a4b; padding: 10px 20px;">BUY NOW</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+      <!-- Add Navigation -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+    
+  
+  <!-- Content -->
+  <div id="content"> 
+    
+    <!-- New Arrival -->
+    <section class="padding-top-100 padding-bottom-100">
+      <div class="container"> 
+        
+        <!-- Main Heading -->
+        <div class="heading text-center">
+          <h4>new arrival</h4>
+          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus maximus vehicula. 
+          Sed feugiat, tellus vel tristique posuere, diam</span> </div>
+      </div>
+      
+      <!-- New Arrival -->
+      <div class="arrival-block single-img-demos"> 
+      {% for product in last_added_prods %}
+        <!-- Item -->
+        <div class="item"> 
+          <!-- Images --> 
+          <img class="img-1" src="{{ product.cover_image.url}}" alt=""> 
+          <!-- Overlay  -->
+          <div class="overlay"> 
+            <!-- Price --> 
+            {% if product.discount %}
+            <span class="price"><small>$</small>{{ product.discounted_price }}</span> 
+            {% else %}
+            <span class="price"><small>$</small>{{ product.price }}</span> 
+            {% endif %}
+            <!-- <span class="price"><small>$</small>299</span> -->
+            <div class="position-center-center"> <a href="{{ product.cover_image.url }}" data-lighter><i class="icon-magnifier"></i></a> </div>
+          </div>
+          <!-- Item Name -->
+          <div class="item-name"> <a href="{% url 'product:product_detail' product.slug %}">{{ product.title }}</a>
+            <p>{{ product.small_description }}</p>
+          </div>
+        </div>
+      {% endfor %}  
+ 
+      </div>
+    </section>
+    
+    <!-- Popular Products -->
+    <section class="padding-top-50 padding-bottom-150">
+      <div class="container"> 
+        
+        <!-- Main Heading -->
+        <div class="heading text-center">
+          <h4>popular products</h4>
+          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus maximus vehicula. 
+          Sed feugiat, tellus vel tristique posuere, diam</span> </div>
+        
+        <!-- Popular Item Slide -->
+        <div class="papular-block block-slide single-img-demos"> 
+          {% for product in last_added_prods %}
+          <!-- Item -->
+          <div class="item"> 
+            <!-- Item img -->
+            <div class="item-img"> <img class="img-1" src="{{ product.cover_image.url }}" alt="" > 
+              <!-- Overlay -->
+              <div class="overlay">
+                <div class="position-center-center">
+                  <div class="inn"><a href="{% static 'images/product-1.jpg' %}" data-lighter><i class="icon-magnifier"></i></a> <a href="#."><i class="icon-basket"></i></a> <a href="#." ><i class="icon-heart"></i></a></div>
+                </div>
+              </div>
+            </div>
+            <!-- Item Name -->
+            <div class="item-name"> <a href="{% url 'product:product_detail' slug=product.slug %}">{{ product.title }}</a>
+              <p>{{ product.small_description }}</p>
+            </div>
+            <!-- Price --> 
+            {% if product.discount %}
+            <span class="price"><small>$</small>{{ product.discounted_price }}</span> 
+            {% else %}
+            <span class="price"><small>$</small>{{ product.price }}</span> 
+            {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+  {% endblock %}
+
+
+  {% block js %}
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+  var swiper = new Swiper('.swiper-container', {
+    loop: true, // Optional: Makes the slider loop infinitely
+    autoplay: {
+      delay: 5000, // Optional: Delay between transitions
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    effect: 'fade', // Optional: Add transition effect
+  });
+</script>
+
+  {% endblock %}

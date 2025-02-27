@@ -1,0 +1,288 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<style>
+  /* Style for main comment */
+.main-comment {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.media-left img {
+    border-radius: 50%;
+}
+
+/* Style for child comments */
+.child-comment {
+    margin-left: 40px; /* Indent child comments */
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.child-comment .media-body {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Style for reply button */
+.reply-button {
+    display: inline-block;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.reply-form {
+    display: none; /* Initially hide reply form */
+    margin-top: 10px;
+}
+
+/* Style for show comments button */
+.toggle-comments {
+    display: inline-block;
+    margin-top: 10px;
+    cursor: pointer;
+}
+</style>
+{% endblock %}
+
+  {% block content %}
+  
+  <!--======= SUB BANNER =========-->
+  <section class="sub-bnr" style="background-image: url('{% static 'images/slide-bg-2-1.jpg' %}');" data-stellar-background-ratio="0.5">
+    <div class="position-center-center">
+      <div class="container">
+        <h4>{{blog.title}}</h4>
+        <p>{{blog.content|safe|truncatechars:30}}</p>
+        <!-- <ol class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li class="active">BLOg details</li>
+        </ol> -->
+      </div>
+    </div>
+  </section>
+  
+  <!-- Content -->
+  <div id="content"> 
+    
+    <!-- Blog List -->
+    <section class="blog-list blog-list-3 single-post padding-top-100 padding-bottom-100">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9"> 
+            
+            <!-- Article -->
+            <article> 
+              <!-- Post Img --> 
+              <img class="img-responsive" src="{{blog.image.url}}" alt="" > 
+              <!-- Tittle -->
+              <div class="post-tittle left"> <a href="#." class="tittle">{{blog.title}}</a> 
+                <!-- Post Info --> 
+                <span><i class="primary-color icon-user"></i> by {{blog.author.username}}</span> <span><i class="primary-color icon-calendar"></i>{{ blog.created_at | date:"d M Y" }}</span> <span><i class="primary-color icon-bubble"></i> 05</span> <span><i class="primary-color icon-tag"></i>{{blog.category}}</span> </div>
+              <!-- Post Content -->
+              <div class="text-left">
+                
+              {{blog.content|safe}}
+                
+                <!-- Tags -->
+                <!-- <div class="row margin-top-50">
+                  <div class="col-md-8">
+                    <h5 class="shop-tittle margin-top-60 margin-bottom-30">PAUPLAR TAGS</h5>
+                    <ul class="shop-tags">
+                      {% for tag in tag_list %}
+                          <li><a href="#."> {{ tag.title }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </div> -->
+
+                <!--=======  COMMENTS =========-->
+                <div class="comments margin-top-80">
+                  <h5 class="shop-tittle margin-bottom-30">COMMENTS</h5>
+                  <ul class="media-list padding-left-15">
+                    <!--=======  COMMENTS =========-->
+                   {% for blogcomment in blog.blogcomment_set.all %}
+    {% if not blogcomment.parent %}
+        <li class="media main-comment">
+            <div class="media-left">
+                <a href="#" class="avatar">
+                  <img class="media-object img-responsive" src="{{ blogcomment.user.get_image  }}" alt="" style="border-radius: 50%; width: 50px; height: 50px; object-fit: cover;">
+
+                </a>
+            </div>
+            <div class="media-body">
+                <h6 class="media-heading">{{ blogcomment.user.username }}<span><i class="icon-clock primary-color"></i>{{ blogcomment.created_at }}</span></h6>
+                <p>{{ blogcomment.comments }}</p>
+                <a href="#." class="reply-button" id="reply_button_{{ blogcomment.id }}"><i class="icon-bubble primary-color"></i> Reply</a>
+                <a href="#." class="toggle-comments" id="toggle_comments_{{ blogcomment.id }}"><i class="icon-comments primary-color"></i> Show Comments</a>
+
+                <form action="" method="post" class="reply-form" id="subform_{{ blogcomment.id }}">
+                    {% csrf_token %}
+                    {{ form.comments }}
+                    {{ form.comments.errors }}
+                    <input type="hidden" name="parent" value="{{ blogcomment.id }}">
+                    <input type="submit" value="Send">
+                </form>
+
+                <!-- Display child comments -->
+                <ul class="children" id="comments_{{ blogcomment.id }}" style="display: none;">
+                    {% for child in blogcomment.children.all %}
+                        <li class="media child-comment">
+                            <div class="media-left">
+                                <a href="#" class="avatar">
+                                    <img class="media-object img-responsive" src="{{ child.user.get_image }}" alt="" style="width: 50px;">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h6 class="media-heading">{{ child.user.username }}<span><i class="icon-clock primary-color"></i>{{ child.created_at }}</span></h6>
+                                <p>{{ child.comments }}</p>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </li>
+    {% endif %}
+{% endfor %}
+
+
+                  </ul>
+                  <hr>
+                  
+                  <!--=======  LEAVE COMMENTS =========-->
+                  <h5 class="shop-tittle margin-top-80">User reviews</h5>
+                  <form class="padding-left-15" method="post">
+                    {% csrf_token %}
+                    <ul class="row">
+
+                        <label>
+                          {{ form.comments }}
+                          {{ form.comments.errors }}
+                          <!-- <textarea class="form-control" placeholder=""></textarea> -->
+                        </label>
+                      </li>
+                      <li class="col-sm-12">
+                        <button type="submit" class="btn margin-top-30">Submit Comment </button>
+                      </li>
+                    </ul>
+                  </form>
+                </div>
+              </div>
+            </article>
+            <hr>
+            
+            <!--  You May Like -->
+            <h5 class="shop-tittle margin-top-50 margin-bottom-50">you may like </h5>
+            <div class="alos-like padding-left-15"> 
+              {% for blog in similar_blogs %}
+              <!-- Article -->
+              <article>
+                <div class="row">
+                  <div class="col-sm-5"> 
+                    <!-- Post Img --> 
+                    <img class="img-responsive" src="{{blog.image.url}}" alt="" > </div>
+                  <div class="col-sm-7"> 
+                    <!-- Tittle -->
+                    <div class="post-tittle left"> <a href="{{ blog.get_absolute_url }}" class="tittle">{{blog.title}}</a> 
+                      <!-- Post Info --> 
+                      <span><i class="primary-color icon-user"></i> by {{blog.author.username}}</span> <span><i class="primary-color icon-calendar"></i> {{blog.created_at| date:"d M Y" }}</span> <span><i class="primary-color icon-bubble"></i> 05</span> <span><i class="primary-color icon-tag"></i>{{blog.category.title}}</span> </div>
+                    <!-- Post Content -->
+                    <div class="text-left">
+                      {{blog.content|safe|truncatechars:290}}
+                      <a href="{{ blog.get_absolute_url }}" class="red-more">READ MORE</a> </div>
+                  </div>
+                </div>
+              </article>
+              {% endfor %}
+            </div>
+          </div>
+          
+          <!-- Sider Bar -->
+          <div class="col-md-3">
+            <div class="shop-sidebar"> 
+              
+              <!-- SEARCH -->
+               
+              <!-- <div class="search">
+                <input class="form-control" type="search" placeholder="Search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+              </div>
+               -->
+              <!-- Category -->
+              <h5 class="shop-tittle margin-bottom-30">category</h5>
+              <ul class="shop-cate">
+                {% for category in categories %}
+                <li><a href="{% url 'blog:blog_list-us' %}?category={{category.id}}"> {{ category.title }} <span>{{ category.blogs.all.count }}</span></a></li>
+                {% endfor %}
+              </ul>
+              
+              <!-- Recent Post -->
+              <h5 class="shop-tittle margin-top-60 margin-bottom-30">recent post</h5>
+              <ul class="papu-post margin-top-20">
+                {% for blog in latest_blogs %}
+                <li class="media">
+                  <div class="media-left"> <a href="{% url 'blog:blog_detail-us' blog.slug %}"> <img class="media-object" src="{{ blog.image.url }}" alt=""></a> </div>
+                  <div class="media-body"> <a class="media-heading" href="{% url 'blog:blog_detail-us' blog.id %}">{{blog.title}}</a> <span>Posted on {{ blog.created_at | date:"M Y" }}</span> </div>
+                </li>
+                {% endfor %}
+              </ul>
+              
+              <!-- TAGS -->
+              <h5 class="shop-tittle margin-top-60 margin-bottom-30">PAUPLAR TAGS</h5>
+              <ul class="shop-tags">
+                {% for tag in tag_list %}
+                    <li><a href="{% url 'blog:blog_list-us' %}?tag={{tag.id}}"> {{ tag.title }}</a></li>
+                {% endfor %}
+              </ul>
+              
+              <!-- BRAND -->
+              <!-- <h5 class="shop-tittle margin-top-60 margin-bottom-30">archives</h5>
+              <ul class="shop-cate">
+                <li><a href="#."> January 2015 </a></li>
+                <li><a href="#."> February 2015 </a></li>
+                <li><a href="#."> March 2015 </a></li>
+                <li><a href="#."> April 2015 </a></li>
+                <li><a href="#."> May 2015 </a></li>
+              </ul>
+               -->
+              <!-- SIDE BACR BANER -->
+              {% for banner in side_banners %}
+              <div class="side-bnr margin-top-50"> <img class="img-responsive" src="{{ banner.image.url }}" alt="Banner Image">
+                <div class="position-center-center"> <span class="price"><small>$</small>200</span>
+                  <div class="bnr-text">look
+                    hot
+                    with
+                    style</div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Culture BLOCK -->
+    <section class="cultur-block">
+      <ul>
+        {% for block in culture_blocks %}
+              <li><img src="{{ block.image.url }}" alt="Culture Image"></li>
+        {% endfor %}
+      </ul>
+      
+      <!-- Culture Text -->
+      <div class="position-center-center">
+        <div class="container">
+          <div class="col-sm-6 center-block">
+            <h4>FOLLOW US @ INSTAGRAM</h4>
+            <p>Phasellus lacinia fermentutm bibendum. Interdum et malante ipuctus non. Nulla lacinia,
+              eros vel fermentum consectetur, ris dolor in ex. </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+  
+  {% endblock %}

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: pavshop-tech-postgres
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: "12345"
+      POSTGRES_USER: 'tech'
+      POSTGRES_DB: 'pavshop'
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379
+
+volumes:
+  postgres_data:
+
+
+
+# docker exec 87a654bfc67d pg_dump -U tech -d pavshop -c > backup.sql
+
+
+# restore the postgres backup
+# docker exec -i <new_container_id> psql -U <postgres_user> -d <postger_db> < backup.sql

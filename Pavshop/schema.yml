@@ -1,0 +1,840 @@
+openapi: 3.0.3
+info:
+  title: 'Pavshop API Documentation '
+  version: 1.0.0
+  description: Your project description
+paths:
+  /api/blogcategories/:
+    get:
+      operationId: api_blogcategories_list
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BlogCategory'
+          description: ''
+    post:
+      operationId: api_blogcategories_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlogCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BlogCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BlogCategory'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogCategory'
+          description: ''
+  /api/blogs/:
+    get:
+      operationId: api_blogs_list
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BlogPost'
+          description: ''
+    post:
+      operationId: api_blogs_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlogPostCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BlogPostCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BlogPostCreate'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogPostCreate'
+          description: ''
+  /api/blogs/{id}/:
+    get:
+      operationId: api_blogs_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogPostCreate'
+          description: ''
+    put:
+      operationId: api_blogs_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlogPostCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BlogPostCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BlogPostCreate'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogPostCreate'
+          description: ''
+    patch:
+      operationId: api_blogs_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBlogPostCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedBlogPostCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBlogPostCreate'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogPostCreate'
+          description: ''
+    delete:
+      operationId: api_blogs_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/blogtags/:
+    get:
+      operationId: api_blogtags_list
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BlogTag'
+          description: ''
+  /api/categories/:
+    get:
+      operationId: api_categories_list
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+          description: ''
+    post:
+      operationId: api_categories_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Category'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Category'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+          description: ''
+  /api/products/:
+    get:
+      operationId: api_products_list
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+          description: ''
+    post:
+      operationId: api_products_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProductCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProductCreate'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductCreate'
+          description: ''
+  /api/products/{id}/:
+    get:
+      operationId: api_products_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductCreate'
+          description: ''
+    put:
+      operationId: api_products_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProductCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProductCreate'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductCreate'
+          description: ''
+    patch:
+      operationId: api_products_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProductCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedProductCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedProductCreate'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductCreate'
+          description: ''
+    delete:
+      operationId: api_products_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/tags/:
+    get:
+      operationId: api_tags_list
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tag'
+          description: ''
+    post:
+      operationId: api_tags_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Tag'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Tag'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+          description: ''
+  /auth/token/:
+    post:
+      operationId: auth_token_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserTokenObtain'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserTokenObtain'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserTokenObtain'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserTokenObtain'
+          description: ''
+  /auth/token/refresh/:
+    post:
+      operationId: auth_token_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+components:
+  schemas:
+    BlogCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 150
+      required:
+      - id
+      - title
+    BlogPost:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        tag:
+          type: array
+          items:
+            $ref: '#/components/schemas/BlogTag'
+        category:
+          $ref: '#/components/schemas/BlogCategory'
+        content:
+          type: string
+        image:
+          type: string
+          format: uri
+        author_name:
+          type: string
+          readOnly: true
+      required:
+      - author_name
+      - category
+      - content
+      - id
+      - image
+      - tag
+      - title
+    BlogPostCreate:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        tag:
+          type: array
+          items:
+            type: integer
+        category:
+          type: integer
+        content:
+          type: string
+        image:
+          type: string
+          format: uri
+        author:
+          type: integer
+          readOnly: true
+      required:
+      - author
+      - category
+      - content
+      - id
+      - image
+      - tag
+      - title
+    BlogTag:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 150
+      required:
+      - id
+      - title
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 150
+      required:
+      - id
+      - title
+    PatchedBlogPostCreate:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        tag:
+          type: array
+          items:
+            type: integer
+        category:
+          type: integer
+        content:
+          type: string
+        image:
+          type: string
+          format: uri
+        author:
+          type: integer
+          readOnly: true
+    PatchedProductCreate:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        tag:
+          type: array
+          items:
+            type: integer
+        category:
+          type: integer
+        description:
+          type: string
+        small_description:
+          type: string
+          maxLength: 255
+        cover_image:
+          type: string
+          format: uri
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        brand:
+          type: integer
+        base_description:
+          type: string
+          maxLength: 255
+        color:
+          type: array
+          items:
+            type: integer
+        simple_facts:
+          type: string
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        tag:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        category:
+          $ref: '#/components/schemas/Category'
+        description:
+          type: string
+        small_description:
+          type: string
+          maxLength: 255
+        cover_image:
+          type: string
+          format: uri
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        brand:
+          type: integer
+        base_description:
+          type: string
+          maxLength: 255
+        color:
+          type: array
+          items:
+            type: integer
+        simple_facts:
+          type: string
+      required:
+      - base_description
+      - brand
+      - category
+      - color
+      - cover_image
+      - description
+      - id
+      - price
+      - simple_facts
+      - small_description
+      - tag
+      - title
+    ProductCreate:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        tag:
+          type: array
+          items:
+            type: integer
+        category:
+          type: integer
+        description:
+          type: string
+        small_description:
+          type: string
+          maxLength: 255
+        cover_image:
+          type: string
+          format: uri
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        brand:
+          type: integer
+        base_description:
+          type: string
+          maxLength: 255
+        color:
+          type: array
+          items:
+            type: integer
+        simple_facts:
+          type: string
+      required:
+      - base_description
+      - brand
+      - category
+      - color
+      - cover_image
+      - description
+      - id
+      - price
+      - simple_facts
+      - small_description
+      - tag
+      - title
+    Tag:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 150
+      required:
+      - id
+      - title
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          writeOnly: true
+      required:
+      - access
+      - refresh
+    UserTokenObtain:
+      type: object
+      properties:
+        email:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+      required:
+      - email
+      - password
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

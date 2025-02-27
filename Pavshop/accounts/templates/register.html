@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+  {% block content %}
+  
+  <!--======= SUB BANNER =========-->
+  <section class="sub-bnr" style="background-image: url('{% static 'images/slide-bg-2-1.jpg' %}');" data-stellar-background-ratio="0.5">
+    <div class="position-center-center">
+      <div class="container">
+        <h4>REGISTER</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus maximus vehicula. 
+          Sed feugiat, tellus vel tristique posuere, diam</p>
+        <ol class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Pages</a></li>
+          <li class="active">REGISTER</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Content -->
+  <div id="content"> 
+    
+    <!--======= PAGES INNER =========-->
+    <section class="chart-page padding-top-100 padding-bottom-100">
+      <div class="container"> 
+        
+        <!-- Payments Steps -->
+        <div class="shopping-cart"> 
+          
+          <!-- SHOPPING INFORMATION -->
+          <div class="cart-ship-info register">
+            <div class="row"> 
+              
+              <!-- ESTIMATE SHIPPING & TAX -->
+              <div class="col-sm-12">
+                <h6>{% trans 'REGISTER' %}</h6>
+                {% include 'includes/messages.html' %}
+                <form method="post">
+                  {% csrf_token %}
+                  {{ form.non_field_errors }}
+                  <ul class="row">
+                    
+                    <!-- Name -->
+                    <li class="col-md-6">
+                      <label> 
+                        {{ form.first_name }}
+                        {{ form.first_name.errors }}
+                        <!-- <input type="text" name="first-name" value="" placeholder=""> -->
+                      </label>
+                    </li>
+                    <!-- LAST NAME -->
+                    <li class="col-md-6">
+                      <label>
+                        {{ form.last_name }}
+                        {{ form.last_name.errors }}
+                        <!-- <input type="text" name="last-name" value="" placeholder=""> -->
+                      </label>
+                      <!-- User Name -->
+                    <li class="col-md-6">
+                      <label> 
+                        {{ form.username }}
+                        {{ form.username.errors }}
+                        <!-- <input type="text" name="first-name" value="" placeholder=""> -->
+                      </label>
+                    </li>
+
+                    <!-- EMAIL ADDRESS -->
+                    <li class="col-md-6">
+                      <label> 
+                        {{ form.email }}
+                        {{ form.email.errors }}
+                        <!-- <input type="text" name="contry-state" value="" placeholder=""> -->
+                      </label>
+                    </li>
+                    <!-- PHONE -->
+                    <li class="col-md-6">
+                      <label> 
+                        {{ form.phone }}
+                        {{ form.phone.errors }}
+                        <!-- <input type="text" name="postal-code" value="" placeholder=""> -->
+                      </label>
+                    </li>
+                    
+                    <!-- LAST NAME -->
+                    <li class="col-md-6">
+                      <label> 
+                        {{ form.password }}
+                        {{ form.password.errors }}
+                        <!-- <input type="password" name="last-name" value="" placeholder=""> -->
+                      </label>
+                    </li>
+
+                    <!-- LAST NAME -->
+                    <li class="col-md-6">
+                      <label>
+                        {{ form.confirm_password }}
+                        {{ form.confirm_password.errors }}
+                        <!-- <input type="password" name="last-name" value="" placeholder=""> -->
+                      </label>
+                    </li>
+                    <li class="col-md-6"> 
+                      <!-- ADDRESS -->
+                      <label>
+                        {{ form.address }}
+                        {{ form.address.errors }}
+                        <!-- <input type="text" name="address" value="" placeholder=""> -->
+                      </label>
+                    </li>
+                    <li class="col-md-6"> 
+                      <!-- ADDRESS -->
+                      <label>
+                        {{ form.address }}
+                        {{ form.address.errors }}
+                        <!-- <input type="text" name="address" value="" placeholder=""> -->
+                      </label>
+                    </li>
+                    
+                    <!-- COUNTRY -->
+                    <li class="col-md-6">
+                      <label>
+                        <!-- <select class="selectpicker" name="contry-state">
+                          <option>{{ form.country }}</option>
+                          
+                        </select> -->
+                        {{ form.country }}
+                        {{ form.country.errors }}
+                      </label>
+                    </li>
+
+                    
+                    <!-- TOWN/CITY -->
+                    <li class="col-md-6">
+                      <label>
+                        {{ form.city }}
+                        {{ form.city.errors }}
+                        <!-- <input type="text" name="town" value="" placeholder=""> -->
+                      </label>
+                    </li>
+                    
+                    <!-- PHONE -->
+                    <li class="col-md-6">
+                      <button type="submit" class="btn">{% trans 'REGISTER NOW' %}</button>
+                    </li>
+                  </ul>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+
+  {% endblock %}

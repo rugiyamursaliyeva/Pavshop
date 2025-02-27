@@ -1,0 +1,117 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-23 00:51+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\accounts\forms.py:39
+msgid "Confirm Password"
+msgstr "Şifrəni təsdiqləyin"
+
+#: .\accounts\forms.py:68
+msgid "First Name"
+msgstr "Ad"
+
+#: .\accounts\forms.py:72
+msgid "Username"
+msgstr "İstifadəçi adı"
+
+#: .\accounts\forms.py:76
+msgid "Last Name"
+msgstr "Soyad"
+
+#: .\accounts\forms.py:80 .\core\forms.py:27
+msgid "Email"
+msgstr "Email"
+
+#: .\accounts\forms.py:84
+msgid "Address"
+msgstr "Ünvan"
+
+#: .\accounts\forms.py:88
+msgid "City"
+msgstr "Şəhər"
+
+#: .\accounts\forms.py:92 .\core\forms.py:31
+msgid "Phone"
+msgstr "Telefon"
+
+#: .\accounts\forms.py:96
+msgid "Password"
+msgstr "Şifrə"
+
+#: .\accounts\templates\register.html:39
+msgid "REGISTER"
+msgstr "Qeydiyyatdan keç"
+
+#: .\accounts\templates\register.html:145
+msgid "REGISTER NOW"
+msgstr "Qeydiyyatdan keçin"
+
+#: .\core\forms.py:23
+msgid "Full Name"
+msgstr "Ad Soyad"
+
+#: .\core\forms.py:35
+msgid "Subject"
+msgstr "Mövzu"
+
+#: .\core\forms.py:39
+#, fuzzy
+#| msgid "Masssage"
+msgid "Messsage"
+msgstr "Mesaj"
+
+#: .\core\templates\base.html:69
+msgid "Home"
+msgstr "Ana səhifə"
+
+#: .\core\templates\base.html:80
+msgid "Pages"
+msgstr "Səhifələr"
+
+#: .\core\templates\base.html:86
+msgid "About"
+msgstr "Haqqımızda"
+
+#: .\core\templates\base.html:89
+msgid "Designer"
+msgstr "Dizayner"
+
+#: .\core\templates\base.html:117
+msgid "store"
+msgstr "Mağaza"
+
+#: .\core\templates\base.html:167
+msgid "contact"
+msgstr "Əlaqə"
+
+#: .\core\templates\contact.html:28
+msgid "PLEASE fill-up FEW details"
+msgstr "Zəhmət olmasa, məlumatı doldurun!"
+
+#: .\core\templates\contact.html:77
+msgid "SEND MAIL"
+msgstr "GÖNDƏR"
+
+#: .\core\views.py:27
+msgid "Successfully sent!"
+msgstr "Uğurla göndərildi!"
+
+#: .\product\templates\product-list.html:105
+msgid "category"
+msgstr "Categoriya"

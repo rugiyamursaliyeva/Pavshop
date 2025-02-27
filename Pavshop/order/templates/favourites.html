@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+  {% block content %}
+  
+  <!--======= SUB BANNER =========-->
+
+  
+  <!-- Content -->
+  <div id="content"> 
+    
+    <!-- Products -->
+    <section class="shop-page padding-top-100 padding-bottom-100">
+      <div class="container">
+        <div class="row"> 
+          
+          <!-- Item Content -->
+          <div class="col-sm-9">
+            <div class="item-display">
+              <div class="row"> 
+                <!-- Products Select -->
+                <!-- <div class="col-xs-6">
+                  <div class="pull-left">  -->
+                    
+                    <!-- GRID & LIST --> 
+                    <!-- <a href="#." class="grid-style"><i class="icon-grid"></i></a> <a href="#." class="list-style"><i class="icon-list"></i></a> </div>
+                </div>
+                <div class="col-xs-6 text-right"> <span class="product-num">Showing 1 - 10 of 30 products</span> </div>
+              </div>
+            </div> -->
+            
+            <!-- Popular Item Slide -->
+            <div class="papular-block row single-img-demos"> 
+              
+              <!-- Item -->
+               {% for prod in products %}
+              <div class="col-md-4">
+                <div class="item"> 
+                  <!-- Sale Tags -->
+                   {% if prod.discount %}
+                  <div class="on-sale"> {{prod.discount}}% <span>OFF</span> </div>
+                  {% endif %}
+                  <!-- Item img -->
+                  
+                    <div class="item-img"> <img class="img-1" src="{{prod.cover_image.url}}" alt="" >
+                      
+                      <!-- Overlay -->
+                      <div class="overlay">
+                        <div class="position-center-center">
+                          <div class="inn">
+                            <a href="{{prod.cover_image.url}}" data-lighter>  <i class="icon-magnifier"></i></a> 
+                            <a href="{% url 'order:add_to_cart' prod.id %}"><i class="icon-basket"></i></a>
+                            {% if prod.in_favourite %}
+                              <a href="{% url 'order:remove_from_fav' prod.id %}" ><i class="ion-ios-heart"></i></a></div>
+                            {% else %}
+                              <a href="{% url 'order:add_to_fav' prod.id %}" ><i class="ion-ios-heart-outline"></i></a></div>
+                            {% endif %}
+                        </div>
+                      </div>
+        
+                    </div>
+                  
+                  <!-- Item Name -->
+                  <div class="item-name"> <a href="{{ prod.get_absolute_url }}">{{prod.title}}</a>
+                    <p>{{prod.small_description}}</p>
+                  </div>
+                  <!-- Price --> 
+                  {% if prod.discount %}
+                  <span class="price"><small>$</small>{{prod.get_total_price}}</span> </div>
+                  {% else %}
+                  <span class="price"><small>$</small>{{prod.price}}</span> </div>
+                  {% endif %}
+                  
+              </div>
+              {% endfor %}
+            </div>
+            
+            <!-- Pagination -->
+            <ul class="pagination in-center">
+              {% if page_obj.has_previous %}
+              <li><a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-left"></i></a></li>
+              {% endif %}
+              {% for page in  page_obj.paginator.page_range %}
+              {% if page is page_obj.number %}
+              <li class="active"><a href="#">{{page}}</a></li>
+              {% else %}
+              <li><a href="?page={{page}}">{{page}}</a></li>
+              {% endif %}
+              {% endfor %}
+              {% if page_obj.has_next %}
+              <li><a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-angle-right"></i></a></li>
+              {% endif %}
+            </ul>
+          </div>
+        
+        </div>
+      </div>
+    </section>
+
+  
+  {% endblock %}
