@@ -1,1 +1,2 @@
-![Pavshop](images/pavshop.png)
+![Pavshop](../images/pavshop.png)
+
