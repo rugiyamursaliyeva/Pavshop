@@ -1,2 +1,2 @@
-![Pavshop](../images/pavshop.png)
+
 
